@@ -11,6 +11,27 @@ from models.city import City
 from models.amenity import Amenity
 from models.review import Review
 
+def isfloat(num):
+    try:
+        float(num)
+        return True
+    except ValueError:
+        return False
+
+def parse_input(my_list):
+    my_dict = {}
+    for param in my_list:
+        key, value = param.split("=")
+        if value[0] != '"':
+            if value.isnumeric():
+                value = int(value)
+            elif isfloat(value):
+                value = float(value)
+        else:
+            value = value[1:-1]
+            value.replace("_", " ")
+        my_dict[key] = value
+    return my_dict
 
 class HBNBCommand(cmd.Cmd):
     """ Contains the functionality for the HBNB console"""
@@ -115,16 +136,28 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """ Create an object of any class"""
+        args = shlex.split(args)
         if not args:
             print("** class name missing **")
             return
-        elif args not in HBNBCommand.classes:
+        elif args[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[args]()
+        new_instance = HBNBCommand.classes[args[0]]() #pass in dict
         storage.save()
         print(new_instance.id)
         storage.save()
+
+    def do_test(self, line):
+        print(line)
+        print("-------")
+        x = line.split(" ")
+        for i in x:
+            print(i)
+        print("-----------")
+        print(line.split(" "))
+
+        print(parse_input(line.split(" ")))
 
     def help_create(self):
         """ Help information for the create method """
