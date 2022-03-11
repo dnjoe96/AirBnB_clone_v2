@@ -144,10 +144,11 @@ class HBNBCommand(cmd.Cmd):
         elif args[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        my_dict = parse_input(args[1:])
         new_instance = HBNBCommand.classes[args[0]]() #pass in dict
-        for key, val in my_dict.items():
-            new_instance.__dict__[key] = val
+        if len(args) > 1:
+            my_dict = parse_input(args[1:])
+            for key, val in my_dict.items():
+                new_instance.__dict__[key] = val
         new_instance.save()
         print(new_instance.id)
 
