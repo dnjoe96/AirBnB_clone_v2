@@ -13,6 +13,7 @@ from models.amenity import Amenity
 from models.review import Review
 
 def isfloat(num):
+    """Checks if a string can be converted to a float"""
     try:
         float(num)
         return True
@@ -20,6 +21,7 @@ def isfloat(num):
         return False
 
 def parse_input(my_list):
+    """transforms arguments passed to objects to the correct format"""
     my_dict = {}
     for param in my_list:
         key, value = param.split("=")
@@ -153,15 +155,22 @@ class HBNBCommand(cmd.Cmd):
         print(new_instance.id)
 
     def do_test(self, line):
-        print(line)
+        print("line---> {}".format(line))
+        print("line type--->{}".format(type(line)))
         print("-------")
-        x = line.split(" ")
+        print("-------")
+        x = shlex.split(line)
+        print("split line---> {}".format(x))
+        print("split line type---> {}".format(type(x)))
+        print("Printing each argument below...:")
         for i in x:
             print(i)
         print("-----------")
-        print(line.split(" "))
+        print("-----------")
 
-        print(parse_input(line.split(" ")))
+        y = parse_input(x[1:])
+        print("parsed input argument---> {}".format(y))
+        print("parsed input arguments type---> {}".format(type(y)))
 
     def help_create(self):
         """ Help information for the create method """
