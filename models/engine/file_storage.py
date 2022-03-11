@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """This module defines a class to manage file storage for hbnb clone"""
 import json
+from models.city import City
 
 
 class FileStorage:
@@ -17,6 +18,15 @@ class FileStorage:
                     my_dict[key] = val
             return my_dict
         return FileStorage.__objects
+
+    @property
+    def cities(self, value): # value = state_id
+        city_list = Filestorage.all(City)
+        my_cities = []
+        for val in city_list.values():
+            if  val.state_id == value:
+                my_cities.append(val)
+        return my_cities
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
@@ -37,7 +47,7 @@ class FileStorage:
         from models.user import User
         from models.place import Place
         from models.state import State
-        from models.city import City
+#        from models.city import City
         from models.amenity import Amenity
         from models.review import Review
 
