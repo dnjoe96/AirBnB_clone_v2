@@ -19,15 +19,6 @@ class FileStorage:
             return my_dict
         return FileStorage.__objects
 
-    @property
-    def cities(self, value): # value = state_id
-        city_list = Filestorage.all(City)
-        my_cities = []
-        for val in city_list.values():
-            if  val.state_id == value:
-                my_cities.append(val)
-        return my_cities
-
     def new(self, obj):
         """Adds new object to storage dictionary"""
         self.all().update({obj.to_dict()['__class__'] + '.' + obj.id: obj})
