@@ -4,6 +4,7 @@ from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, Integer, DateTime
 from models import storage_type
 
+
 class State(BaseModel, Base):
     """ State class """
     __tablename__ = 'states'
