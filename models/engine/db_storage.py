@@ -31,10 +31,10 @@ class DBStorage:
         HBNB_ENV = os.getenv("HBNB_ENV")
         self.__engine = create_engine("mysql+mysqldb://{}:{}@{}/{}".format(
             HBNB_MYSQL_USER, HBNB_MYSQL_PWD, HBNB_MYSQL_HOST, HBNB_MYSQL_DB
-        ) pool_pre_ping=True)
+        ), pool_pre_ping=True)
 
         if HBNB_ENV == "test":
-            Base-metadata.drop_all(self.__engine)
+            Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
         """Returns all the objects of a certain class
