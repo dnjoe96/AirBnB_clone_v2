@@ -29,7 +29,7 @@ class DBStorage:
         HBNB_MYSQL_HOST = os.getenv("HBNB_MYSQL_HOST")
         HBNB_MYSQL_DB = os.getenv("HBNB_MYSQL_DB")
         HBNB_ENV = os.getenv("HBNB_ENV")
-        self.__engine = create_engine("mysql+mysqldb://{}:{}@{}/{}".format(
+        self.__engine = create_enegine("mysql+mysqldb://{}:{}@{}/{}".format(
             HBNB_MYSQL_USER, HBNB_MYSQL_PWD, HBNB_MYSQL_HOST, HBNB_MYSQL_DB
         ), pool_pre_ping=True)
 
@@ -63,7 +63,7 @@ class DBStorage:
 
         self.__session.commit()
 
-    def delte(self, obj=None):
+    def delete(self, obj=None):
         """deletes an object from the current database session"""
 
         if obj is not None:
