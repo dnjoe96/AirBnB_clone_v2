@@ -7,14 +7,14 @@ ufw allow 'Nginx HTTP' 2> /dev/null
 # echo 'Hello World!' > /usr/share/nginx/html/index.html
 # echo 'Hello World!' >  /var/www/html/index.nginx-debian.html
 mkdir -p /data/web_static/releases 2> /dev/null
-mkdir /data/web_static/shared
-mkdir /data/web_static/releases/test
+mkdir /data/web_static/shared 2> /dev/null
+mkdir /data/web_static/releases/test 2> /dev/null
 touch /data/web_static/releases/test/index.html
-echo 'Hello World\n\nWelcome to nginx' > /data/web_static/releases/test/index.html
+echo "Hello World\n\nWelcome to nginx" > /data/web_static/releases/test/index.html
 
-if [ -f '/data/web_static/current' ]
+if [ -d '/data/web_static/current' ]
 then
-	rm -f /data/web_static/current
+	rm -rf /data/web_static/current
 fi
 
 ln -s /data/web_static/releases/test /data/web_static/current
@@ -22,12 +22,9 @@ ln -s /data/web_static/releases/test /data/web_static/current
 g_id=$(getent passwd ubuntu | cut -d: -f3)
 group=$(getent group $g_id | cut -d: -f1)
 
-for file in ls -R /data
-do
-	chown ubuntu:$group $file
-done
+chown -R ubuntu:$group /data
 
-sed -i '/location \// i \\tlocation /hbnb_static {\n\t\talias /data/web_static/current/;\n\t}\n' /etc/nginx/sites-available/default
+sed -i '/server_name _;/ a \\tlocation /hbnb_static {\n\t\talias /data/web_static/current/;\n\t}' /etc/nginx/sites-available/default
 sed -i '/listen 80 default_server;/ a \\trewrite ^/redirect_me https://github.com/dnjoe96 permanent;' /etc/nginx/sites-available/default
 sed -i '/listen 80 default_server;/ a \\trewrite ^/redirect_me/ https://github.com/dnjoe96 permanent;' /etc/nginx/sites-available/default
 touch /var/www/html/custom_404.html && echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
