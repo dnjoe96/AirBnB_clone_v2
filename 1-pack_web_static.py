@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """ Fab file for deploying static file """
 from fabric.api import run, get, put, local
 from datetime import datetime
