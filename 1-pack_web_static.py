@@ -6,8 +6,7 @@ import os
 
 
 def do_pack():
-    """
-    This function creates a tar file from the files inside the web_static
+    """This function creates a tar file from the files inside the web_static
     dir
     """
     d = datetime.now()
