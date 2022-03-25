@@ -12,8 +12,8 @@ def do_pack():
     d = datetime.now()
     tarFile = f"web_static_{d.year}{d.month}{d.day}{d.hour}{d.minute}{d.second}.tgz"
 
-    local('if [ ! -d version ]; then mkdir version; fi')
-    res = local(f'tar -cvzf version/{tarFile} web_static')
+    local('if [ ! -d versions ]; then mkdir version; fi')
+    res = local(f'tar -cvzf versions/{tarFile} web_static')
     if res.failed:
         return None
-    return 'version/' + tarFile
+    return 'versions/' + tarFile
