@@ -11,7 +11,8 @@ def do_pack():
     dir
     """
     d = datetime.now()
-    tarFile = f"web_static_{d.year}{d.month}{d.day}{d.hour}{d.minute}{d.second}.tgz"
+    date = f"{d.year}{d.month}{d.day}{d.hour}{d.minute}{d.second}.tgz"
+    tarFile = "web_static_" + date
 
     print('Packing web_static to versions/{}'.format(tarFile))
 
