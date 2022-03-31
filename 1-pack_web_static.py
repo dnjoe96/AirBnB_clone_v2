@@ -1,23 +1,22 @@
 #!/usr/bin/python3
-""" Fab file for deploying static file """
-from fabric.api import run, put, local
+"""pack all content within web_static """
+from fabric.api import local
 from datetime import datetime
 import os
 
 
 def do_pack():
-    """This function creates a tar file from the files inside the web_static
-    dir
+    """pack all content within web_static
+    into a .tgz archive
+    The archive will be put in versions/
     """
-    d = datetime.now()
-    date = f"{d.year}{d.month}{d.day}{d.hour}{d.minute}{d.second}.tgz"
-    tarFile = "web_static_" + date
-
-    print('Packing web_static to versions/{}'.format(tarFile))
-
-    if os.path.isdir("versions") is False:
-        local("mkdir -p versions")
-    res = local(f'tar -cvzf versions/{tarFile} web_static')
-    if res.failed:
-        return None
-    return 'versions/' + tarFile
+    if not os.path.exists("versions"):
+        local("mkdir versions")
+    now = datetime.now()
+    name = "versions/web_static_{}.tgz".format(
+        now.strftime("%Y%m%d%H%M%S")
+    )
+    cmd = "tar -cvzf {} {}".format(name, "web_static")
+    result = local(cmd)
+    if not result.failed:
+        return name
