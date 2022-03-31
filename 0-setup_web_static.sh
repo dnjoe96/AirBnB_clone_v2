@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2028,SC2086,SC2016
 # configure nginx server
 
 apt update
@@ -10,7 +11,7 @@ mkdir -p /data/web_static/releases 2> /dev/null
 mkdir /data/web_static/shared 2> /dev/null
 mkdir /data/web_static/releases/test 2> /dev/null
 touch /data/web_static/releases/test/index.html
-echo "Hello World\n\nWelcome to nginx" > /data/web_static/releases/test/index.html
+echo "Hello World Welcome to nginx" > /data/web_static/releases/test/index.html
 
 if [ -d '/data/web_static/current' ]
 then
