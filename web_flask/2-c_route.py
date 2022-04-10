@@ -17,7 +17,8 @@ def hbnb():
 
 @app.route("/c/<string:text>")
 def whatisc(text):
-    return f"C {text}"
+    final_text = text.replace("_", " ")
+    return f"C {final_text}"
 
 
 if __name__ == "__main__":
