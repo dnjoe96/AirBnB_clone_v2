@@ -1,15 +1,13 @@
 #!/usr/bin/python3
 """ route file """
+from flask import Flask
+app = Flask(__name__)
+app.strict_slashes = False
 
-if __name__ == '__main__':
-    from flask import Flask
+@app.route("/")
+def hello_hbnb():
+    return "Hello HBNB!"
 
-    app = Flask(__name__)
-    app.url_map.strict_slashes = False
 
-    @app.route('/')
-    def index():
-        """ Index page """
-        return 'Hello HBNB!'
-
-    app.run(debug=True, host='0.0.0.0')
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000)
