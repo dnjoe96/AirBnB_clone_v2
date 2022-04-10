@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+!/usr/bin/python3
 """This module defines a class to manage the database storage for hbnb clone"""
 import os
 from sqlalchemy import create_engine
@@ -81,3 +81,8 @@ class DBStorage:
         )
         Session = scoped_session(session_factory)
         self.__session = Session()
+
+
+    def close(self):
+        self.__session.remove()
+

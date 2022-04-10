@@ -65,3 +65,6 @@ class FileStorage:
                 self.save()
             except KeyError:
                 pass
+
+    def close(self):
+        reload()
