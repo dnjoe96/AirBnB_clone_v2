@@ -21,7 +21,7 @@ def hbnb():
 def whatisc(text):
     """ view definition of whatisc"""
     final_text = text.replace("_", " ")
-    return f"C {final_text}"
+    return "C {}".format(final_text)
 
 
 @app.route('/python')
@@ -29,7 +29,7 @@ def whatisc(text):
 def show(text="is cool"):
     """ view definition of python """
     final_text = text.replace("_", " ")
-    return f"Python {final_text}"
+    return "Python ".format(final_text)"
 
 
 if __name__ == "__main__":
