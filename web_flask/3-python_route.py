@@ -29,7 +29,7 @@ def whatisc(text):
 def show(text="is cool"):
     """ view definition of python """
     final_text = text.replace("_", " ")
-    return "Python ".format(final_text)
+    return "Python {}".format(final_text)
 
 
 if __name__ == "__main__":
