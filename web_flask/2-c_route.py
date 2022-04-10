@@ -2,26 +2,26 @@
 """ route file """
 from flask import Flask
 app = Flask(__name__)
-# app.url_map.strict_slashes = False
+app.url_map.strict_slashes = False
 
 
-@app.route("/", strict_slashes=False)
+@app.route("/")
 def hello_hbnb():
-    """ view definition """
+    """ view definition for hello """
     return "Hello HBNB!"
 
 
-@app.route("/hbnb", strict_slashes=False)
+@app.route("/hbnb")
 def hbnb():
-    """ view definition """
+    """ view definition for hbnb """
     return "HBNB"
 
 
-@app.route("/c/<text>", strict_slashes=False)
+@app.route("/c/<text>")
 def whatisc(text):
-    """ view definition """
+    """ view definition for whatisc """
     final_text = text.replace("_", " ")
-    return f"C {final_text}"
+    return "C {}".format(final_text)
 
 
 if __name__ == "__main__":
